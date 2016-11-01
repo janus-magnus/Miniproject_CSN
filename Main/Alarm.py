@@ -2,11 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BOARD)#pin setups
-GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(12, GPIO.OUT)
-GPIO.setup(37, GPIO.OUT)
-
-
+GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)#button1 input GPIO
+GPIO.setup(12, GPIO.OUT)#LED Powersource(Als output aan staat is het 3.3V zelfde als pin 1 de standaard powerpin)
+GPIO.setup(37, GPIO.OUT)#button2 output GPIO
 GPIO.setup(36, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 GPIO.output(37, 1)#set pin 37 aan zodat hij als 3.3V output werkt
