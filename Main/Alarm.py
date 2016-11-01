@@ -13,8 +13,7 @@ GPIO.output(37, 1)#set pin 37 aan zodat hij als 3.3V output werkt
 LED_off_time = 2
 LED_on_time = 2
 
-
-def Aon():
+def Aon(): #Turn on LED
     while True:
             if GPIO.input(36):#button2 moet ingedrukt blijven worden tot hij stopt
                 break
@@ -23,6 +22,13 @@ def Aon():
             GPIO.output(12, 0)
             time.sleep(LED_off_time)
 
+def Afaster(): #Make the LED blink faster
+	LED_on_time-=1
+	LED_off_time-=1
+
+def Aslower(): #Make the LED blink slower
+	LED_off_time+=1
+	LED_on_time+=1        
 
 while True:
     if GPIO.input(11) == 1:
