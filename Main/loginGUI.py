@@ -1,14 +1,16 @@
-from tkinter import *
-import tkinter.messagebox as tm
+from Tkinter import *
+import tkMessageBox as tm
 
+class loginFrame(Frame):
 
-class LoginFrame(Frame):
-    def __init__(self, master):
-        super().__init__(master)
+    #def __init__(self):
+        #super(loginFrame, self).__init__()
+
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
 
         self.label_1 = Label(self, text="Username")
         self.label_2 = Label(self, text="Password")
-
         self.entry_1 = Entry(self)
         self.entry_2 = Entry(self, show="*")
 
@@ -26,20 +28,18 @@ class LoginFrame(Frame):
         self.pack()
 
     def _login_btn_clickked(self):
-        #print("Clicked")
-        username = self.entry_1.get()
-        password = self.entry_2.get()
+            #print("Clicked")
+            username = self.entry_1.get()
+            password = self.entry_2.get()
 
-        #print(username, password)
+            #print(username, password)
 
-        if username == "john" and password == "password":
-            tm.showinfo("Login info", "Welcome John")
-        else:
-            tm.showerror("Login error", "Incorrect username")
-
-
-
+            if username == "john" and password == "password":
+                tm.showinfo("Login info", "Welcome John")
+            else:
+                tm.showerror("Login error", "Incorrect username")
 
 root = Tk()
-lf = LoginFrame(root)
-root.mainloop()
+lf = loginFrame(master=root)
+lf.mainloop()
+
