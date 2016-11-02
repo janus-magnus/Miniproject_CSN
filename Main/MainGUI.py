@@ -2,23 +2,24 @@ from Tkinter import *
 import Alarm
 import threading
 
+
 class MainFrame(Frame):
 
-    def primeThread(self):
+    def prime_thread(self):  # start een thread voor alarmPrime
 
-        thread = threading.Thread(target=Alarm.AlarmPrime)
+        thread = threading.Thread(target=Alarm.alarm_prime)
         thread.deamon = True
         thread.start()
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
 
-        Alarm.Init()
+        Alarm.init()
 
-        self.Bfaster = Button(self, text='Sneller', command=lambda: Alarm.Afaster())
-        self.Bslower = Button(self, text='langzaamer',command=lambda: Alarm.Aslower())
-        self.Bprime = Button(self, text='Alarm Activeren', command=lambda: self.primeThread())
-        self.Bdisable = Button(self, text='Alarm Deactivereen', command=lambda: Alarm.Aoff())
+        self.Bfaster = Button(self, text='Sneller', command=lambda: Alarm.a_faster())
+        self.Bslower = Button(self, text='langzaamer', command=lambda: Alarm.a_slower())
+        self.Bprime = Button(self, text='Alarm Activeren', command=lambda: self.prime_thread())
+        self.Bdisable = Button(self, text='Alarm Deactivereen', command=lambda: Alarm.a_off())
 
         self.Bfaster.grid(row=0, sticky=E)
         self.Bslower.grid(row=1, sticky=E)
@@ -27,7 +28,8 @@ class MainFrame(Frame):
 
         self.pack()
 
-def newFrame():
+
+def new_frame():  # maakt een nieuwe venster aan
 
     root = Tk()
     mf = MainFrame(master=root)
