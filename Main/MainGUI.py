@@ -1,17 +1,28 @@
 from Tkinter import *
-#import Alarm
-from Main import Alarm # de bovenstaande import is voor op de pi, werkt anders daar
+import Alarm
+import threading
+
+
+
 
 class MainFrame(Frame):
+
+    def primeThread(self):
+        Alarm.Init()
+        thread = threading.Thread(target=Alarm.AlarmPrime())
+        thread.deamon = True
+        thread.start()
+
     def __init__(self, master=None):
         Frame.__init__(self, master)
 
-        Alarm.Init
 
-        self.Bfaster = Button(self, text='Sneller', command=Alarm.Afaster())
-        self.Bslower = Button(self, text='langzaamer',command=Alarm.Aslower())
-        self.Bprime = Button(self, text='Alarm Activeren', command=Alarm.AlarmPrime)
-        self.Bdisable = Button(self, text='Alarm Deactivereen', command=Alarm.Aoff())
+
+
+        self.Bfaster = Button(self, text='Sneller', command=lambda: Alarm.Afaster())
+        self.Bslower = Button(self, text='langzaamer',command=lambda: Alarm.Aslower())
+        self.Bprime = Button(self, text='Alarm Activeren', command=lambda: self.primeThread())
+        self.Bdisable = Button(self, text='Alarm Deactivereen', command=lambda: Alarm.Aoff())
 
         self.Bfaster.grid(row=0, sticky=E)
         self.Bslower.grid(row=1, sticky=E)
