@@ -6,13 +6,12 @@ class MainFrame(Frame):
 
     def primeThread(self):
 
-        thread = threading.Thread(target=Alarm.AlarmPrime())
+        thread = threading.Thread(target=Alarm.AlarmPrime)
         thread.deamon = True
         thread.start()
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
-
 
         Alarm.Init()
 
@@ -26,11 +25,10 @@ class MainFrame(Frame):
         self.Bdisable.grid(row=2, column=0)
         self.Bprime.grid(row=3, column=0)
 
-
-
         self.pack()
 
+def newFrame():
 
-root = Tk()
-mf = MainFrame(master=root)
-mf.mainloop()
+    root = Tk()
+    mf = MainFrame(master=root)
+    mf.mainloop()

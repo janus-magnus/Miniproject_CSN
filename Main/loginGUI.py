@@ -1,10 +1,15 @@
 from Tkinter import *
 import tkMessageBox as tm
+import RPi.GPIO as GPIO
+import MainGUI
+
+GPIO.setmode(GPIO.BOARD)#pin setups
+GPIO.setup(37, GPIO.OUT)#button2 output GPIO
+GPIO.setup(36, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.output(37, 1)#set pin 37 aan zodat hij als 3.3V output werkt
+
 
 class loginFrame(Frame):
-
-    #def __init__(self):
-        #super(loginFrame, self).__init__()
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -28,18 +33,24 @@ class loginFrame(Frame):
         self.pack()
 
     def _login_btn_clickked(self):
-            #print("Clicked")
+            print("Clicked")
             username = self.entry_1.get()
             password = self.entry_2.get()
 
             #print(username, password)
 
             if username == "john" and password == "password":
-                tm.showinfo("Login info", "Welcome John")
+                self.quit# zou het venster moeten sluiten doet het niet
+                MainGUI.newFrame() # opent een nieuwe MainGUI/ werkt wel
+                #tm.showinfo("Login info", "Welcome John")
             else:
                 tm.showerror("Login error", "Incorrect username")
 
-root = Tk()
-lf = loginFrame(master=root)
-lf.mainloop()
+while True:
+    if GPIO.input(36) == 1:
+        root = Tk()
+        lf = loginFrame(master=root)
+        lf.mainloop()
+        break
+
 
