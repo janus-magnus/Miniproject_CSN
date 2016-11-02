@@ -2,13 +2,10 @@ from Tkinter import *
 import Alarm
 import threading
 
-
-
-
 class MainFrame(Frame):
 
     def primeThread(self):
-        Alarm.Init()
+
         thread = threading.Thread(target=Alarm.AlarmPrime())
         thread.deamon = True
         thread.start()
@@ -17,7 +14,7 @@ class MainFrame(Frame):
         Frame.__init__(self, master)
 
 
-
+        Alarm.Init()
 
         self.Bfaster = Button(self, text='Sneller', command=lambda: Alarm.Afaster())
         self.Bslower = Button(self, text='langzaamer',command=lambda: Alarm.Aslower())
