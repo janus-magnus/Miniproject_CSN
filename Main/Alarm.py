@@ -20,7 +20,7 @@ global LED_off_time
 LED_off_time = 2
 global LED_on_time
 LED_on_time = 2
-status = 'go'
+#status = 'go'
 
 
 def Afaster(): #Make the LED blink faster
@@ -40,17 +40,17 @@ def Aslower(): #Make the LED blink slower
     print(LED_on_time)
 
 def Aon(): #Turn on LED
-    ticker = 0
-    while True:
-        if status == 'exit':
-            break
-        ticker+=1
+    #ticker = 0
+    #while True:
+        #if status == 'exit':
+            #break
+        #ticker+=1
         GPIO.output(12, 1)
         time.sleep(LED_on_time)
         GPIO.output(12, 0)
         time.sleep(LED_off_time)
-        if ticker == 5:
-            break
+        #if ticker == 5:
+            #break
 
 def Aoff():
     global status
@@ -59,10 +59,13 @@ def Aoff():
 def AlarmPrime():
     while True:
         if GPIO.input(11) == 1:
+        	status = 'on'
+        if status == 'on':
             pt = threading.Thread(target=Aon())
             pt.deamon = True
             pt.start()
-            break
+        if status == 'exit':
+        	break;
 
 
 GPIO.cleanup()
